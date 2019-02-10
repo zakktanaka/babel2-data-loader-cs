@@ -1,4 +1,5 @@
-﻿using Babel2.DataLoader.Utilities;
+﻿using Babel2.DataLoader.Parser.Enums;
+using Babel2.DataLoader.Utilities;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -61,6 +62,14 @@ namespace Babel2.DataLoader.Parser.RepositoryImpl
             if (cache.TryGetValue(type, out isp))
             {
                 return isp.Value;
+            }
+
+            if (type.IsEnum)
+            {
+                return cache.GetOrAdd(
+                    type,
+                    key => new Lazy<IStringParser>(() => new EnumStringParser(type))
+                    ).Value;
             }
 
             return null;
