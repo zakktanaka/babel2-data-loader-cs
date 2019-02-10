@@ -46,6 +46,7 @@
     <Compile Include="DataLoader\Parser\IStringParser^1.cs" />
     <Compile Include="DataLoader\Parser\Primitives\BoolStringConverter.cs" />
     <Compile Include="DataLoader\Parser\Primitives\NumberStringConverter.cs" />
+    <Compile Include="DataLoader\Parser\Primitives\StringStringParser.cs" />
     <Compile Include="DataLoader\Parser\RepositoryImpl\StringParserRepositoryImpl.cs" />
     <Compile Include="DataLoader\Parser\StringParserRepository.cs" />
     <Compile Include="DataLoader\Utilities\ReflectionUtility.cs" />
