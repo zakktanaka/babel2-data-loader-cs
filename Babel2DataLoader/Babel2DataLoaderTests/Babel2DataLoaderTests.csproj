@@ -51,6 +51,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="DataLoader\Parser\Primitives\TestBoolStringConverter.cs" />
     <Compile Include="DataLoader\Parser\Primitives\TestNumberStringConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
