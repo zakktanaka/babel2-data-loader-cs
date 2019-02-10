@@ -10,11 +10,11 @@ namespace Babel2.DataLoader.Parser.RepositoryImpl
 {
     class StringParserRepositoryImpl : IStringParserRepository
     {
-        private static ConcurrentDictionary<Type, IStringParser> cache;
+        private static ConcurrentDictionary<Type, Lazy<IStringParser>> cache;
 
         static StringParserRepositoryImpl()
         {
-            cache = new ConcurrentDictionary<Type, IStringParser>();
+            cache = new ConcurrentDictionary<Type, Lazy<IStringParser>>();
 
             var ispi = typeof(IStringParser);
 
@@ -25,19 +25,83 @@ namespace Babel2.DataLoader.Parser.RepositoryImpl
                 var cnstrinfo = type.GetDefaultConstructor();
                 var isp = (IStringParser)cnstrinfo.Invoke(Type.EmptyTypes);
 
-                cache.TryAdd(isp.TargetType, isp);
+                cache.TryAdd(isp.TargetType, new Lazy<IStringParser>(() => isp));
             }
-
         }
 
         public IStringParser GetStringParser(Type type)
         {
-            return cache[type];
+            var isp = GetStringParserInternal(type);
+            if(isp != null)
+            {
+                return isp;
+            }
+
+            throw new Exception("TODO");
         }
 
         public IStringParser<T> GetStringParser<T>()
         {
-            return GetStringParser(typeof(T)) as IStringParser<T>;
+            var type = typeof(T);
+
+            var isp = GetStringParserInternal(type);
+            if(isp != null)
+            {
+                return isp is IStringParser<T> ?
+                    (IStringParser<T>)isp :
+                    new StringParserImpl<T>(isp);
+            }
+
+            throw new Exception("TODO");
+        }
+
+        private IStringParser GetStringParserInternal(Type type)
+        {
+            Lazy<IStringParser> isp;
+            if (cache.TryGetValue(type, out isp))
+            {
+                return isp.Value;
+            }
+
+            return null;
+        }
+
+        private class StringParserImpl<T> : IStringParser<T>
+        {
+            private IStringParser isp;
+
+            public StringParserImpl(IStringParser isp)
+            {
+                this.isp = isp;
+            }
+
+            public Type TargetType
+            {
+                get
+                {
+                    return isp.GetType();
+                }
+            }
+
+            public T ConvertFrom(string stringvalue)
+            {
+                return (T)isp.ConvertObjectFrom(stringvalue);
+            }
+
+            public object ConvertObjectFrom(string stringvalue)
+            {
+                return isp.ConvertObjectFrom(stringvalue);
+            }
+
+            public string ConvertObjectTo(object objectvalue)
+            {
+                return isp.ConvertObjectTo(objectvalue);
+            }
+
+            public string ConvertTo(T objectvalue)
+            {
+                return isp.ConvertObjectTo(objectvalue);
+            }
         }
     }
 }
