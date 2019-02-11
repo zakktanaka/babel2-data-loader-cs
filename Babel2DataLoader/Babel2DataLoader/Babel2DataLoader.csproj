@@ -41,6 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataLoader\Parser\AbstractStringParser.cs" />
+    <Compile Include="DataLoader\Parser\Collections\CollectionParserHelper.cs" />
+    <Compile Include="DataLoader\Parser\Collections\ListStringParser.cs" />
     <Compile Include="DataLoader\Parser\Enum\EnumStringParser.cs" />
     <Compile Include="DataLoader\Parser\IStringParser.cs" />
     <Compile Include="DataLoader\Parser\IStringParserRepository.cs" />

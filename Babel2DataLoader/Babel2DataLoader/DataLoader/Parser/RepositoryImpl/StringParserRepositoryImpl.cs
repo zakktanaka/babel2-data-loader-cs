@@ -1,4 +1,5 @@
-﻿using Babel2.DataLoader.Parser.Enum;
+﻿using Babel2.DataLoader.Parser.Collections;
+using Babel2.DataLoader.Parser.Enum;
 using Babel2.DataLoader.Parser.Nullable;
 using Babel2.DataLoader.Utilities;
 using System;
@@ -83,6 +84,30 @@ namespace Babel2.DataLoader.Parser.RepositoryImpl
                         key => new Lazy<IStringParser>(() => new NullableStringParser(type, GetStringParser(utype)))
                         ).Value;
                 }
+
+                var cparser = GetStringParserIfCollection(type);
+                if(cparser != null)
+                {
+                    return cache.GetOrAdd(
+                        type,
+                        key => new Lazy<IStringParser>(cparser)
+                        ).Value;
+                }
+            }
+
+            return null;
+        }
+
+        private Func<IStringParser> GetStringParserIfCollection(Type type)
+        {
+            var ttype = type.GetGenericTypeDefinition();
+
+            if(ttype == typeof(List<>) || ttype == typeof(IList<>))
+            {
+                return () => new ListStringParser(
+                    type, 
+                    GetStringParser(type.GetGenericArguments()[0])
+                    );
             }
 
             return null;
