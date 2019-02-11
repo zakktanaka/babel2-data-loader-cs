@@ -1,12 +1,12 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Babel2.DataLoader.Parser.Enums;
+using Babel2.DataLoader.Parser.Enum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Babel2.DataLoader.Parser.Enums.Tests
+namespace Babel2.DataLoader.Parser.Enum.Tests
 {
     [TestClass()]
     public class TestEnumStringParser

@@ -1,4 +1,4 @@
-﻿using Babel2.DataLoader.Parser.Enums;
+﻿using Babel2.DataLoader.Parser.Enum;
 using Babel2.DataLoader.Utilities;
 using System;
 using System.Collections.Concurrent;

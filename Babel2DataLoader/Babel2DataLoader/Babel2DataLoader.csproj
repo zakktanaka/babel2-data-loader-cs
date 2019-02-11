@@ -41,7 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataLoader\Parser\AbstractStringParser.cs" />
-    <Compile Include="DataLoader\Parser\Enums\EnumStringParser.cs" />
+    <Compile Include="DataLoader\Parser\Enum\EnumStringParser.cs" />
     <Compile Include="DataLoader\Parser\IStringParser.cs" />
     <Compile Include="DataLoader\Parser\IStringParserRepository.cs" />
     <Compile Include="DataLoader\Parser\IStringParser^1.cs" />
@@ -53,6 +53,9 @@
     <Compile Include="DataLoader\Parser\StringParserRepository.cs" />
     <Compile Include="DataLoader\Utilities\ReflectionUtility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DataLoader\Parser\Nullable\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

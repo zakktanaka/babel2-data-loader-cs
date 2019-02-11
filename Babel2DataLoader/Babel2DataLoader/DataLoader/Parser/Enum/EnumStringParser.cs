@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Babel2.DataLoader.Parser.Enums
+namespace Babel2.DataLoader.Parser.Enum
 {
     class EnumStringParser : IStringParser
     {
@@ -13,7 +13,7 @@ namespace Babel2.DataLoader.Parser.Enums
 
         public object ConvertObjectFrom(string stringvalue)
         {
-            return Enum.Parse(TargetType, stringvalue,true);
+            return System.Enum.Parse(TargetType, stringvalue,true);
         }
 
         public string ConvertObjectTo(object objectvalue)
