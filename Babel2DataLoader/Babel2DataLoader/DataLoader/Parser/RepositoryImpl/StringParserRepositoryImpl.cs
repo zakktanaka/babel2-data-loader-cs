@@ -1,22 +1,24 @@
 ﻿using Babel2.DataLoader.Parser.Collections;
 using Babel2.DataLoader.Parser.Enum;
+using Babel2.DataLoader.Parser.Extensions;
 using Babel2.DataLoader.Parser.Nullable;
+using Babel2.DataLoader.Parser.Primitives;
 using Babel2.DataLoader.Utilities;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Babel2.DataLoader.Parser.RepositoryImpl
 {
     class StringParserRepositoryImpl : IStringParserRepository
     {
         private static ConcurrentDictionary<Type, Lazy<IStringParser>> cache;
+        private static ConcurrentDictionary<string, Lazy<IStringParser<DateTime>>> datetimecache;
 
         static StringParserRepositoryImpl()
         {
+            datetimecache = new ConcurrentDictionary<string, Lazy<IStringParser<DateTime>>>();
             cache = new ConcurrentDictionary<Type, Lazy<IStringParser>>();
 
             var ispi = typeof(IStringParser);
@@ -111,6 +113,16 @@ namespace Babel2.DataLoader.Parser.RepositoryImpl
             }
 
             return null;
+        }
+
+        public IStringParser<DateTime> GetDateTimeParser(DateTimeFormatType formatType)
+        {
+            return GetDateTimeParser(formatType.GetValue());
+        }
+
+        public IStringParser<DateTime> GetDateTimeParser(string format)
+        {
+            return datetimecache.GetOrAdd(format, new Lazy<IStringParser<DateTime>>(() => new CustomFormatDateTimeStringParser(format))).Value;
         }
 
         private class StringParserImpl<T> : IStringParser<T>

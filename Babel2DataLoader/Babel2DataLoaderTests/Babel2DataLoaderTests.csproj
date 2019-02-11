@@ -57,6 +57,7 @@
     <Compile Include="DataLoader\Parser\Enums\TestEnumStringParser.cs" />
     <Compile Include="DataLoader\Parser\Nullable\TestNullableStringParser.cs" />
     <Compile Include="DataLoader\Parser\Primitives\TestBoolStringConverter.cs" />
+    <Compile Include="DataLoader\Parser\Primitives\TestCustomFormatDateTimeStringParser.cs" />
     <Compile Include="DataLoader\Parser\Primitives\TestDateTimeStringParser.cs" />
     <Compile Include="DataLoader\Parser\Primitives\TestNumberStringConverter.cs" />
     <Compile Include="DataLoader\Parser\Primitives\TestStringStringParser.cs" />

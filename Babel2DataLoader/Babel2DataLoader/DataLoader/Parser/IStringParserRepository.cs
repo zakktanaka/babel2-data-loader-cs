@@ -6,5 +6,7 @@ namespace Babel2.DataLoader.Parser
     {
         IStringParser<T> GetStringParser<T>();
         IStringParser GetStringParser(Type type);
+        IStringParser<DateTime> GetDateTimeParser(DateTimeFormatType formatType);
+        IStringParser<DateTime> GetDateTimeParser(string format);
     }
 }
