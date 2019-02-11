@@ -1,4 +1,5 @@
 ﻿using Babel2.DataLoader.Parser.Enum;
+using Babel2.DataLoader.Parser.Nullable;
 using Babel2.DataLoader.Utilities;
 using System;
 using System.Collections.Concurrent;
@@ -70,6 +71,18 @@ namespace Babel2.DataLoader.Parser.RepositoryImpl
                     type,
                     key => new Lazy<IStringParser>(() => new EnumStringParser(type))
                     ).Value;
+            }
+
+            if (type.IsGenericType)
+            {
+                var utype = System.Nullable.GetUnderlyingType(type);
+                if(utype != null)
+                {
+                    return cache.GetOrAdd(
+                        type,
+                        key => new Lazy<IStringParser>(() => new NullableStringParser(type, GetStringParser(utype)))
+                        ).Value;
+                }
             }
 
             return null;
