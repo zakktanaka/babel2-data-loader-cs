@@ -15,10 +15,12 @@ namespace Babel2.DataLoader.Parser.RepositoryImpl
     {
         private static ConcurrentDictionary<Type, Lazy<IStringParser>> cache;
         private static ConcurrentDictionary<string, Lazy<IStringParser<DateTime>>> datetimecache;
+        private static ConcurrentDictionary<BoolFormatType, Lazy<IStringParser<bool>>> boolcache;
 
         static StringParserRepositoryImpl()
         {
             datetimecache = new ConcurrentDictionary<string, Lazy<IStringParser<DateTime>>>();
+            boolcache = new ConcurrentDictionary<BoolFormatType, Lazy<IStringParser<bool>>>();
             cache = new ConcurrentDictionary<Type, Lazy<IStringParser>>();
 
             var ispi = typeof(IStringParser);
@@ -123,6 +125,16 @@ namespace Babel2.DataLoader.Parser.RepositoryImpl
         public IStringParser<DateTime> GetDateTimeParser(string format)
         {
             return datetimecache.GetOrAdd(format, new Lazy<IStringParser<DateTime>>(() => new CustomFormatDateTimeStringParser(format))).Value;
+        }
+
+        public IStringParser<bool> GetBoolParser(BoolFormatType formatType)
+        {
+            return boolcache.GetOrAdd(formatType, new Lazy<IStringParser<bool>>(() =>
+            {
+                var tf = formatType.GetValue();
+                return new CustomFormatBoolStringParser(tf.Item1, tf.Item2);
+            })
+            ).Value;
         }
 
         private class StringParserImpl<T> : IStringParser<T>
