@@ -14,9 +14,12 @@ namespace Babel2.DataLoader.Parser.Collections
 
         public static IEnumerable ConvertElementsFrom(string stringvalue, IStringParser elementParser)
         {
-            foreach(var value in stringvalue.Split(Discs))
+            if (!string.IsNullOrEmpty(stringvalue))
             {
-                yield return elementParser.ConvertObjectFrom(value);
+                foreach (var value in stringvalue.Split(Discs))
+                {
+                    yield return elementParser.ConvertObjectFrom(value);
+                }
             }
         }
 
