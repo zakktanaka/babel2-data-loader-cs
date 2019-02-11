@@ -16,7 +16,7 @@ namespace Babel2.DataLoader.Parser.Collections
         {
             foreach(var value in stringvalue.Split(Discs))
             {
-                yield return elementParser.ConvertObjectFrom(value.Trim());
+                yield return elementParser.ConvertObjectFrom(value);
             }
         }
 
