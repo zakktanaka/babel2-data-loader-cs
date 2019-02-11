@@ -1,6 +1,7 @@
 ﻿using Babel2.DataLoader.Utilities;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace Babel2.DataLoader.Parser.Collections
@@ -16,7 +17,7 @@ namespace Babel2.DataLoader.Parser.Collections
         {
             TargetType = targetType;
             this.elementStringParser = elementStringParser;
-            this.constructorinfo = targetType.GetDefaultConstructor();
+            constructorinfo = typeof(List<>).MakeGenericType(targetType.GetGenericArguments()[0]).GetDefaultConstructor();
         }
 
         public object ConvertObjectFrom(string stringvalue)
