@@ -7,15 +7,22 @@ namespace Babel2.DataLoader.Utilities
 {
     static class ReflectionUtility
     {
-        public static IEnumerable<Type> AllTypes()
+        public static Type[] AllTypesWhere(Func<Type, bool> func)
         {
-            foreach(var assambly in AppDomain.CurrentDomain.GetAssemblies())
+            var types = new List<Type>();
+
+            foreach (var assambly in AppDomain.CurrentDomain.GetAssemblies())
             {
-                foreach(var type in assambly.GetTypes())
+                try
                 {
-                    yield return type;
+                    types.AddRange(assambly.GetTypes().Where(func));
+                }
+                catch(Exception)
+                {
+                    // skip assembly.
                 }
             }
+            return types.ToArray();
         }
 
         public static ConstructorInfo GetDefaultConstructor(this Type type)

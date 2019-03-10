@@ -3,37 +3,24 @@ using Babel2.DataLoader.Parser.Enum;
 using Babel2.DataLoader.Parser.Extensions;
 using Babel2.DataLoader.Parser.Nullable;
 using Babel2.DataLoader.Parser.Primitives;
-using Babel2.DataLoader.Utilities;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Babel2.DataLoader.Parser.RepositoryImpl
 {
     class StringParserRepositoryImpl : IStringParserRepository
     {
-        private static ConcurrentDictionary<Type, Lazy<IStringParser>> cache;
-        private static ConcurrentDictionary<string, Lazy<IStringParser<DateTime>>> datetimecache;
-        private static ConcurrentDictionary<BoolFormatType, Lazy<IStringParser<bool>>> boolcache;
+        private ConcurrentDictionary<Type, Lazy<IStringParser>> cache;
+        private ConcurrentDictionary<string, Lazy<IStringParser<DateTime>>> datetimecache;
+        private ConcurrentDictionary<BoolFormatType, Lazy<IStringParser<bool>>> boolcache;
 
-        static StringParserRepositoryImpl()
+        public StringParserRepositoryImpl(ConcurrentDictionary<Type, Lazy<IStringParser>> cache)
         {
-            datetimecache = new ConcurrentDictionary<string, Lazy<IStringParser<DateTime>>>();
+            this.cache = cache;
             boolcache = new ConcurrentDictionary<BoolFormatType, Lazy<IStringParser<bool>>>();
-            cache = new ConcurrentDictionary<Type, Lazy<IStringParser>>();
+            datetimecache = new ConcurrentDictionary<string, Lazy<IStringParser<DateTime>>>();
 
-            var ispi = typeof(IStringParser);
-
-            var types = ReflectionUtility.AllTypes()
-                .Where(t => t.GetDefaultConstructor() != null && t.HasInterface(ispi));
-            foreach(var type in types)
-            {
-                var cnstrinfo = type.GetDefaultConstructor();
-                var isp = (IStringParser)cnstrinfo.Invoke(Type.EmptyTypes);
-
-                cache.TryAdd(isp.TargetType, new Lazy<IStringParser>(() => isp));
-            }
         }
 
         public IStringParser GetStringParser(Type type)
@@ -135,6 +122,17 @@ namespace Babel2.DataLoader.Parser.RepositoryImpl
                 return new CustomFormatBoolStringParser(tf.Item1, tf.Item2);
             })
             ).Value;
+        }
+
+        public IStringParserRepository UpdateStringParser(IStringParser parser)
+        {
+            var lazy = new Lazy<IStringParser>(() => parser);
+            cache.AddOrUpdate(
+                parser.TargetType,
+                lazy,
+                (key, value) => lazy
+                );
+            return this;
         }
 
         private class StringParserImpl<T> : IStringParser<T>

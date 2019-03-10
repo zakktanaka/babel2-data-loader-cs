@@ -9,5 +9,6 @@ namespace Babel2.DataLoader.Parser
         IStringParser<DateTime> GetDateTimeParser(DateTimeFormatType formatType);
         IStringParser<DateTime> GetDateTimeParser(string format);
         IStringParser<bool> GetBoolParser(BoolFormatType formatType);
+        IStringParserRepository UpdateStringParser(IStringParser parser);
     }
 }
