@@ -35,6 +35,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.4.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
     </Reference>
@@ -46,6 +47,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataLoader\Csv\Configurations\ClassMapImpl.cs" />
+    <Compile Include="DataLoader\Csv\Configurations\CsvConfiguration.cs" />
+    <Compile Include="DataLoader\Csv\Configurations\CsvConfigurationFactory.cs" />
+    <Compile Include="DataLoader\Csv\Configurations\CsvConfigurationRepository.cs" />
+    <Compile Include="DataLoader\Csv\Configurations\CsvConfigurationRepositoryImpl.cs" />
+    <Compile Include="DataLoader\Csv\Configurations\ICsvConfigurationRepository.cs" />
+    <Compile Include="DataLoader\Csv\CsvReaderFctory.cs" />
+    <Compile Include="DataLoader\Csv\CsvReaderFctoryImpl.cs" />
+    <Compile Include="DataLoader\Csv\CsvReaderImpl.cs" />
+    <Compile Include="DataLoader\Csv\ICsvReader.cs" />
+    <Compile Include="DataLoader\Csv\ICsvReaderFctory.cs" />
+    <Compile Include="DataLoader\Csv\TypeConvension\ITypeConverterRepository.cs" />
+    <Compile Include="DataLoader\Csv\TypeConvension\TypeConverterImpl.cs" />
+    <Compile Include="DataLoader\Csv\TypeConvension\TypeConverterRepository.cs" />
+    <Compile Include="DataLoader\Csv\TypeConvension\TypeConverterRepositoryImpl.cs" />
     <Compile Include="DataLoader\Exceptions\DataLoaderException.cs" />
     <Compile Include="DataLoader\Parser\AbstractStringParser.cs" />
     <Compile Include="DataLoader\Parser\BoolFormatType.cs" />
@@ -71,9 +87,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DataLoader\Csv\Configuration\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
