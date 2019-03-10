@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataLoader\Exceptions\DataLoaderException.cs" />
     <Compile Include="DataLoader\Parser\AbstractStringParser.cs" />
     <Compile Include="DataLoader\Parser\BoolFormatType.cs" />
     <Compile Include="DataLoader\Parser\Collections\CollectionParserHelper.cs" />
