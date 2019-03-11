@@ -28,15 +28,15 @@ namespace Babel2.DataLoader.Csv.Tests
                 .Append("1");
 
             using (var ss = new StringReader(sb.ToString()))
+            using (var csv = CsvReaderFctory.NewCsvReaderFctory.GetReader<Hoge>(ss))
             {
-                var csv = CsvReaderFctory.NewCsvReaderFctory.GetReader<Hoge>(ss);
-                foreach(var hoge in csv.GetRecords())
+
+                foreach (var hoge in csv.Records)
                 {
                     Assert.AreEqual(1, hoge.Id);
                 }
-
-
             }
+
         }
     }
 }

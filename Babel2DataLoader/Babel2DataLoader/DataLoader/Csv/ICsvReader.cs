@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Babel2.DataLoader.Csv
 {
-    public interface ICsvReader<T>
+    public interface ICsvReader<T> : IDisposable
     {
-        IEnumerable<T> GetRecords();
+        IEnumerable<T> Records { get; }
     }
 }

@@ -14,9 +14,16 @@ namespace Babel2.DataLoader.Csv
             csv = new CsvReader(tr, configuration.CsvHelperConfiguration);
         }
 
-        public IEnumerable<T> GetRecords()
+        public void Dispose()
         {
-            return csv.GetRecords<T>();
+            csv.Dispose();
+        }
+
+        public IEnumerable<T> Records {
+            get
+            {
+                return csv.GetRecords<T>();
+            }
         }
     }
 }
