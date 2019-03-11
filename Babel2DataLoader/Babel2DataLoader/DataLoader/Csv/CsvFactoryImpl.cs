@@ -3,11 +3,11 @@ using System.IO;
 
 namespace Babel2.DataLoader.Csv
 {
-    class CsvReaderFctoryImpl : ICsvReaderFctory
+    class CsvFactoryImpl : ICsvFactory
     {
         private ICsvConfigurationRepository csvConfigurationRepository;
 
-        public CsvReaderFctoryImpl(ICsvConfigurationRepository csvConfigurationRepository)
+        public CsvFactoryImpl(ICsvConfigurationRepository csvConfigurationRepository)
         {
             this.csvConfigurationRepository = csvConfigurationRepository;
         }
@@ -15,6 +15,11 @@ namespace Babel2.DataLoader.Csv
         public ICsvReader<T> GetReader<T>(TextReader tr)
         {
             return new CsvReaderImpl<T>(tr, csvConfigurationRepository.GetConfiguration<T>());
+        }
+
+        public ICsvWriter<T> GetWriter<T>(TextWriter tw)
+        {
+            return new CsvWriterImpl<T>(tw, csvConfigurationRepository.GetConfiguration<T>());
         }
     }
 }

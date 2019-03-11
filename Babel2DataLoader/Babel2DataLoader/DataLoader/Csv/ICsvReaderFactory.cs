@@ -2,7 +2,7 @@
 
 namespace Babel2.DataLoader.Csv
 {
-    public interface ICsvReaderFctory
+    public interface ICsvReaderFactory
     {
         ICsvReader<T> GetReader<T>(TextReader tr);
     }

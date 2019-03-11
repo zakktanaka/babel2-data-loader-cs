@@ -11,7 +11,7 @@ using System.IO;
 namespace Babel2.DataLoader.Csv.Tests
 {
     [TestClass()]
-    public class TestCsvReaderFctory
+    public class TestCsvReader
     {
         [DataContract]
         class Hoge
@@ -21,14 +21,14 @@ namespace Babel2.DataLoader.Csv.Tests
         }
 
         [TestMethod()]
-        public void CsvReaderFctory_NewCsvReaderFctoryTest()
+        public void CsvReader_Test()
         {
             var sb = new StringBuilder()
                 .AppendLine("id")
                 .Append("1");
 
             using (var ss = new StringReader(sb.ToString()))
-            using (var csv = CsvReaderFctory.NewCsvReaderFctory.GetReader<Hoge>(ss))
+            using (var csv = CsvFactory.NewCsvFactory.GetReader<Hoge>(ss))
             {
 
                 foreach (var hoge in csv.Records)

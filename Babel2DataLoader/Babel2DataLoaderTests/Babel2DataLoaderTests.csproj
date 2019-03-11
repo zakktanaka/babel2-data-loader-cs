@@ -62,7 +62,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="DataLoader\Csv\Configuration\TestClassMap.cs" />
-    <Compile Include="DataLoader\Csv\TestCsvReaderFctory.cs" />
+    <Compile Include="DataLoader\Csv\TestCsvReader.cs" />
     <Compile Include="DataLoader\Parser\Collections\TestListStringParser.cs" />
     <Compile Include="DataLoader\Parser\Enums\TestEnumStringParser.cs" />
     <Compile Include="DataLoader\Parser\Nullable\TestNullableStringParser.cs" />
