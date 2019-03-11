@@ -47,7 +47,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataLoader\Csv\Configurations\ClassMapImpl.cs" />
     <Compile Include="DataLoader\Csv\Configurations\CsvConfiguration.cs" />
     <Compile Include="DataLoader\Csv\Configurations\CsvConfigurationFactory.cs" />
     <Compile Include="DataLoader\Csv\Configurations\CsvConfigurationRepository.cs" />
@@ -60,7 +59,6 @@
     <Compile Include="DataLoader\Csv\ICsvReaderFctory.cs" />
     <Compile Include="DataLoader\Csv\TypeConvension\ITypeConverterRepository.cs" />
     <Compile Include="DataLoader\Csv\TypeConvension\TypeConverterImpl.cs" />
-    <Compile Include="DataLoader\Csv\TypeConvension\TypeConverterRepository.cs" />
     <Compile Include="DataLoader\Csv\TypeConvension\TypeConverterRepositoryImpl.cs" />
     <Compile Include="DataLoader\Exceptions\DataLoaderException.cs" />
     <Compile Include="DataLoader\Parser\AbstractStringParser.cs" />

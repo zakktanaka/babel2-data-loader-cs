@@ -70,5 +70,10 @@ namespace Babel2.DataLoader.Csv.Configurations
                 propertyinfo.GetCustomAttribute<DataMemberAttribute>() != null &&
                 propertyinfo.GetCustomAttribute<IgnoreDataMemberAttribute>() == null;
         }
+
+        private class ClassMapImpl<T> : ClassMap<T>
+        {
+        }
+
     }
 }
