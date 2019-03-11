@@ -28,6 +28,8 @@ namespace Babel2.DataLoader.Csv.Configurations
             {
                 CsvHelperConfiguration = new Configuration { }
             };
+
+            conf.CsvHelperConfiguration.PrepareHeaderForMatch = (header, id) => header.Trim().ToLower();
             conf.CsvHelperConfiguration.RegisterClassMap(NewClassMap<T>());
 
             return conf;
