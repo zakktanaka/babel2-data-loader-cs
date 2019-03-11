@@ -28,6 +28,7 @@ namespace Babel2.DataLoader.Csv
         public ICsvWriter<T> WriteRecord(T record)
         {
             csv.WriteRecord(record);
+            csv.NextRecord();
             return this;
         }
 
